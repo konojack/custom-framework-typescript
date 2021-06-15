@@ -8,5 +8,11 @@ console.log(user.get('name'));
 user.on('click', () => {
   console.log('ssd');
 });
-user.on('click', () => {});
-console.log(user.events['click'][0]());
+user.on('click', () => {
+  console.log('click2');
+});
+user.on('change', () => {
+  console.log('change');
+});
+user.trigger('change');
+user.trigger('click');
