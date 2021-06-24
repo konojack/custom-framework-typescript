@@ -24,6 +24,10 @@ export class User {
     return this.attributes.get;
   }
 
+  get getAll() {
+    return this.attributes.getAll;
+  }
+
   get on() {
     return this.events.on;
   }
@@ -43,8 +47,19 @@ export class User {
       throw new Error('Cannot fetch without an id');
     }
 
-    this.sync.fetch(id).then((response: AxiosResponse): void => {
-      this.set(response.data);
+    this.sync
+      .fetch(id)
+      .then((response: AxiosResponse): void => {
+        this.set(response.data);
+      })
+      .catch(() => {
+        this.trigger('error');
+      });
+  }
+
+  save(): void {
+    this.sync.save(this.getAll()).then((response: AxiosResponse): void => {
+      this.trigger('save');
     });
   }
 }
