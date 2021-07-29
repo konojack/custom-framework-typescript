@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { User } from './models/User';
 
-const user = new User({ name: 'Dawid', age: 23 });
+const user = User.buildUser({ id: 2, name: 'Dawid', age: 23 });
 console.log(user.get('name'));
+console.log(user.getAll());
