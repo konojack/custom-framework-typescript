@@ -1,7 +1,11 @@
-import axios from 'axios';
-import { User } from './models/User';
+import { Collection } from './models/Collection';
+const collection = new Collection('http://localhost:3000/users');
 
-const user = User.buildUser({ name: 'Dawid', age: 23 });
-console.log(user.get('name'));
-console.log(user.getAll());
-user.save();
+collection.on('change', () => {
+  console.log(
+    '🚀 ~ file: index.ts ~ line 5 ~ collection.on ~ collection',
+    collection
+  );
+});
+
+collection.fetch();
